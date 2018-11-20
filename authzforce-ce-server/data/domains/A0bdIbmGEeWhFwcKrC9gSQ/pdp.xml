@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:pdp xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" xmlns:ns2="http://authzforce.github.io/core/xmlns/pdp/6.0" version="6.0.0" enableXPath="true" strictAttributeIssuerMatch="false" maxVariableRefDepth="10" maxPolicyRefDepth="10">
+    <ns2:attributeDatatype>urn:ogc:def:dataType:geoxacml:1.0:geometry</ns2:attributeDatatype>
+    <ns2:function>urn:ogc:def:function:geoxacml:1.0:geometry-intersects</ns2:function>
+    <ns2:function>urn:ogc:def:function:geoxacml:1.0:geometry-one-and-only</ns2:function>
+    <ns2:function>urn:ogc:def:function:geoxacml:1.0:geometry-disjoint</ns2:function>
+    <ns2:refPolicyProvider xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns4="http://authzforce.github.io/pap-dao-flat-file/xmlns/pdp-ext/3.6" xsi:type="ns4:StaticFlatFileDAORefPolicyProvider" policyLocationPattern="${PARENT_DIR}/policies/*.xml" id="refPolicyProvider"/>
+    <ns2:rootPolicyProvider xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:StaticRefBasedRootPolicyProvider" id="rootPolicyProvider">
+        <ns2:policyRef>RedactPolicySet</ns2:policyRef>
+    </ns2:rootPolicyProvider>
+    <ns2:ioProcChain>
+        <ns2:requestPreproc>urn:ow2:authzforce:feature:pdp:request-preproc:xacml-xml:default-lax</ns2:requestPreproc>
+    </ns2:ioProcChain>
+    <ns2:ioProcChain>
+        <ns2:requestPreproc>urn:ow2:authzforce:feature:pdp:request-preproc:xacml-json:default-lax</ns2:requestPreproc>
+    </ns2:ioProcChain>
+</ns2:pdp>

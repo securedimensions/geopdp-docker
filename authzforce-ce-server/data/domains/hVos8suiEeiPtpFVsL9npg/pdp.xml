@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pdp xmlns="http://authzforce.github.io/core/xmlns/pdp/6.0" xmlns:ns2="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" version="6.0.0" enableXPath="true" strictAttributeIssuerMatch="false" maxVariableRefDepth="10" maxPolicyRefDepth="10">
+    <attributeDatatype>urn:ogc:def:dataType:geoxacml:1.0:geometry</attributeDatatype>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-intersects</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-one-and-only</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-disjoint</function>
+    <refPolicyProvider xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns4="http://authzforce.github.io/pap-dao-flat-file/xmlns/pdp-ext/3.6" xsi:type="ns4:StaticFlatFileDAORefPolicyProvider" policyLocationPattern="${PARENT_DIR}/policies/*.xml" id="refPolicyProvider"/>
+    <rootPolicyProvider xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="StaticRefBasedRootPolicyProvider" id="rootPolicyProvider">
+        <policyRef>OGCWebServicesSecurityPolicySet</policyRef>
+    </rootPolicyProvider>
+</pdp>
