@@ -45,15 +45,11 @@ You can simply stop the geopdp with:
 docker container stop geopdp
 ````
 ## The geoPDP policy
-The executed geoPDP operates on an example GeoXACML policy that acts on OGC Web Map Service. Requests for any other OGC service result in a PERMIT decision
-which will cause the geoPEP to permit the Apache reverse proxy to process the intercepted request.
+The executed geoPDP operates on an example GeoXACML policy that acts on OGC Web Map Service. Requests for any other OGC service result in a PERMIT decision which will cause the geoPEP to permit the Apache reverse proxy to process the intercepted request.
 
-For WMS requests, the policy will return different responses based on the WMS operation. Each response will cause the geoPEP to function differently
-to transform the response from the geoPDP:
-* getCapabilities request: Any GetCapabilities request will cause the geoPDP to return Permit+Obligation. The Obligation has the identifier "XSLT-OUT" and
-an XSLT string. The geoPEP will use that information to apply the XSLT to the Capabilities document before sending it to the client. This can be used to automatically
-apply the OGC Web Services Security standard without chaning the existing infrastructure
-* getMap request: Any getMap request will cause the GeoPDP to return Permit+Obligation. The Obligation has the identifier "Image-Redact" and a MultiPolygon
+For WMS requests, the policy will return different responses based on the WMS operation. Each response will cause the geoPEP to function differently. For this example setup, only image redaction is triggered from the policy:
+* WMS / GetMap or WMTS/GetTile request: A request will cause the GeoPDP to return Permit+Obligation. The Obligation has the identifier "Image-Redact" and a MultiPolygon that defines the area to be redacted. The Policy acts on WMS/WMTS requests using EPSG:4326 and EPSG:3857 spatial reference systems.
+
 This example project uses the tomcat8 jre8 docker template.
 geometry. The geoPEP will use the information to redact the map image in the given geometry before sending it to the client.
 
