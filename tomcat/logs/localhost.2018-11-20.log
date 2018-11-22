@@ -1,7 +1,0 @@
-20-Nov-2018 12:30:10.410 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log Set web app root system property: 'webapp.root' = [/opt/authzforce-ce-server/webapp/]
-20-Nov-2018 12:30:10.491 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log Initializing Logback from [file:/opt/authzforce-ce-server/conf/logback.xml]
-20-Nov-2018 12:30:10.717 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log JUL to SLF4J bridge is not available on the classpath
-20-Nov-2018 12:30:10.718 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log Initializing Spring root WebApplicationContext
-20-Nov-2018 12:30:14.636 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
-20-Nov-2018 12:30:14.643 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
-20-Nov-2018 12:30:14.644 INFO [localhost-startStop-1] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@167080f1')
