@@ -91,6 +91,7 @@ phases:
       - GEOPDP_LATEST=$(expr $GEOPDP_LATEST + 1)
       - aws ssm put-parameter --name "/build/docker/geopdp_latest" --value $GEOPDP_LATEST --type "String" --overwrite > /dev/null 2>&1
       - docker build --tag geopdp:v$GEOPDP_LATEST .
+      - docker tag geopdp:v$GEOPDP_LATEST $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/geopdp:v$GEOPDP_LATEST
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/geopdp:v$GEOPDP_LATEST
 
       # Record new version
