@@ -62,17 +62,17 @@
                         <templateS3Prefix>cloudformation</templateS3Prefix>
                         <templateS3Bucket>${cloudformation_bucket}</templateS3Bucket>
                         <stackName>PipelineRolesStack</stackName>
-                        <stackPath>deploy/EmptyTemplate.json</stackPath>
+                        <stackPath>deploy/cloudformation/templates/EmptyTemplate.json</stackPath>
                         <stackParameterFilePaths>
-                            <stackParameterFilePath>deploy/EmptyTemplateParameters.json</stackParameterFilePath>
+                            <stackParameterFilePath>deploy/cloudformation/parameters/EmptyTemplateParameters.json</stackParameterFilePath>
                         </stackParameterFilePaths>
                         <secondaryStackGroups>
                             <stackGroup>
                                 <stacks>
                                     <secondaryStack>
                                         <stackName>PipelineDeployStack</stackName>
-                                        <stackPath>deploy/PipelineDeploy.json</stackPath>
-                                        <stackParameterFilePath>deploy/PipelineDeployParameters.json</stackParameterFilePath>
+                                        <stackPath>deploy/cloudformation/templates/PipelineDeploy.json</stackPath>
+                                        <stackParameterFilePath>deploy/cloudformation/parameters/PipelineDeployParameters.json</stackParameterFilePath>
                                         <inputParameters>
                                             <inputParameter>
                                                 <parameterName>CodePipelineRoleArn</parameterName>
