@@ -70,7 +70,7 @@
                             <stackGroup>
                                 <stacks>
                                     <secondaryStack>
-                                        <stackName>PipelineDeployStack</stackName>
+                                        <stackName>PipelineDeployGeoPDPStack</stackName>
                                         <stackPath>deploy/cloudformation/templates/PipelineDeploy.json</stackPath>
                                         <stackParameterFilePath>deploy/cloudformation/parameters/PipelineDeployParameters.json</stackParameterFilePath>
                                         <inputParameters>

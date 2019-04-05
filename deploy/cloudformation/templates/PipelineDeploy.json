@@ -75,7 +75,7 @@
                     },
                     "Type": "S3"
                 },
-                "Name": "setup",
+                "Name": "GeoPDP",
                 "RestartExecutionOnUpdate": false,
                 "RoleArn": {
                     "Ref": "CodePipelineRoleArn"
@@ -92,7 +92,7 @@
                                 },
                                 "Configuration": {
                                     "Owner": "securedimensions",
-                                    "Repo": "geopdp",
+                                    "Repo": "geopdp-docker",
                                     "Branch": "testbed15",
                                     "OAuthToken": {
                                         "Ref": "OGCGitOAuthToken"
