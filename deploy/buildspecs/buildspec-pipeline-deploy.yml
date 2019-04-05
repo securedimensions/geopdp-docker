@@ -33,7 +33,7 @@ phases:
       - echo '      <repository>'
       - echo '        <snapshots />'
       - echo '        <id>snapshots</id>'
-      - echo '        <name>$REPO_SNAPSHOT_NAME'</name>'
+      - echo '        <name>'$REPO_SNAPSHOT_NAME'</name>'
       - echo '        <url>'$REPO_SNAPSHOT_URL'</url>'
       - echo '      </repository>'
       - echo '    </repositories>'
