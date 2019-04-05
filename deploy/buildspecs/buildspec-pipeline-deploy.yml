@@ -53,7 +53,7 @@ phases:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/geopdp_latest:v$GEOPDP_LATEST
 
       # Record new version
-      - echo $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/geopdp_latest:v$GEOPDP_LATEST > out/deployed.txt
+      - echo $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/geopdp_latest:v$GEOPDP_LATEST > target/deployed.txt
   post_build:
     commands:
 artifacts:
