@@ -1,0 +1,43 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+  pre_build:
+    commands:
+      # Build the Settings.xml file
+      - REPO_USERNAME=$(aws ssm get-parameters --names "/build/repository/username" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - REPO_PASSWORD=$(aws ssm get-parameters --with-decryption --names "/build/repository/password" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+
+      - echo '<?xml version="1.0" encoding="utf-8"?>' > /root/.m2/settings.xml
+      - echo '<settings>' >> /root/.m2/settings.xml
+      - echo '  <servers>' >> /root/.m2/settings.xml
+      - echo '    <server>' >> /root/.m2/settings.xml
+      - echo '      <id>central</id>' >> /root/.m2/settings.xml
+      - echo '      <username>'${REPO_USERNAME}'</username>' >> /root/.m2/settings.xml
+      - echo '      <password>'${REPO_PASSWORD}'</password>' >> /root/.m2/settings.xml
+      - echo '    </server>' >> /root/.m2/settings.xml
+      - echo '    <server>' >> /root/.m2/settings.xml
+      - echo '      <id>snapshots</id>' >> /root/.m2/settings.xml
+      - echo '      <username>'${REPO_USERNAME}'</username>' >> /root/.m2/settings.xml
+      - echo '      <password>'${REPO_PASSWORD}'</password>' >> /root/.m2/settings.xml
+      - echo '    </server>' >> /root/.m2/settings.xml
+      - echo '  </servers>' >> /root/.m2/settings.xml
+      - echo '</settings>' >> /root/.m2/settings.xml=
+  build:
+    commands:
+      # Get the environment variables for use in the deployment templates
+      - export REPO_CENTRAL_NAME=$(aws ssm get-parameters --names "/build/repository/central/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - export REPO_SNAPSHOT_NAME=$(aws ssm get-parameters --names "/build/repository/snapshot/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - export REPO_CENTRAL_URL=$(aws ssm get-parameters --names "/build/repository/central/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - export REPO_SNAPSHOT_URL=$(aws ssm get-parameters --names "/build/repository/snapshot/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+
+      # Deploy the stacks
+      - mvn cloudformation:deploy
+  post_build:
+    commands:
+artifacts:
+  files:
+    - '**/*'
+  base-directory: target
+  discard-paths: no

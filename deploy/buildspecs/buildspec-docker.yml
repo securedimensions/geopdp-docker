@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+  pre_build:
+    commands:
+      - mkdir out
+      - echo "failed" > out/deployed.txt
+  build:
+    commands:
+      # Login to AWS Elastic Container Repository Service
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+
+      # Build and Push the Docker container to the AWS Container Registry
+      - GEOPDP_LATEST=$(aws ssm get-parameters --names "/build/docker/geopdp_latest" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - GEOPDP_LATEST=0$GEOPDP_LATEST
+      - GEOPDP_LATEST=$(expr $GEOPDP_LATEST + 1)
+      - aws ssm put-parameter --name "/build/docker/geopdp_latest" --value $GEOPDP_LATEST --type "String" --overwrite > /dev/null 2>&1
+      - docker build --tag geopdp:v$GEOPDP_LATEST .
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/geopdp_latest:v$GEOPDP_LATEST
+
+      # Record new version
+      - echo $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/geopdp_latest:v$GEOPDP_LATEST > out/deployed.txt
+  post_build:
+    commands:
+artifacts:
+  files:
+    - '**/*'
+  base-directory: out
+  discard-paths: no
