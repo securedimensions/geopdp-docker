@@ -146,6 +146,12 @@
                     "id": "325e5d31-b9bb-4e97-93aa-3c2ef333e317"
                 }
             }
+        },
+        "Repository": {
+            "Type" : "AWS::ECR::Repository",
+            "Properties" : {
+                "RepositoryName" : "geopdp"
+            }
         }
     },
     "Parameters": {

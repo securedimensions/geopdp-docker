@@ -31,9 +31,15 @@ phases:
       - export REPO_SNAPSHOT_NAME=$(aws ssm get-parameters --names "/build/repository/snapshot/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
       - export REPO_CENTRAL_URL=$(aws ssm get-parameters --names "/build/repository/central/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
       - export REPO_SNAPSHOT_URL=$(aws ssm get-parameters --names "/build/repository/snapshot/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - export REPO_CENTRAL_PLUGIN_NAME=$(aws ssm get-parameters --names "/build/repository/central/plugin/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - export REPO_SNAPSHOT_PLUGIN_NAME=$(aws ssm get-parameters --names "/build/repository/snapshot/plugin/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - export REPO_CENTRAL_PLUGIN_URL=$(aws ssm get-parameters --names "/build/repository/central/plugin/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - export REPO_SNAPSHOT_PLUGIN_URL=$(aws ssm get-parameters --names "/build/repository/snapshot/plugin/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - export CLOUDFORMATION_BUCKET=$(aws ssm get-parameters --names "/build/cloudformation/bucket/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - export POWERUSER_ROLE_ARN=$(aws ssm get-parameters --names "/build/poweruser/arn" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
 
       # Deploy the stacks
-      - mvn cloudformation:deploy
+      - mvn cloudformation:deploy -P Master
   post_build:
     commands:
 artifacts:
