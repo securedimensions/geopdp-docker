@@ -8,9 +8,55 @@ phases:
       # Build the Settings.xml file
       - REPO_USERNAME=$(aws ssm get-parameters --names "/build/repository/username" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
       - REPO_PASSWORD=$(aws ssm get-parameters --with-decryption --names "/build/repository/password" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - REPO_CENTRAL_NAME=$(aws ssm get-parameters --names "/build/repository/central/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - REPO_SNAPSHOT_NAME=$(aws ssm get-parameters --names "/build/repository/snapshot/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - REPO_CENTRAL_URL=$(aws ssm get-parameters --names "/build/repository/central/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - REPO_SNAPSHOT_URL=$(aws ssm get-parameters --names "/build/repository/snapshot/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - REPO_CENTRAL_PLUGIN_NAME=$(aws ssm get-parameters --names "/build/repository/central/plugin/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - REPO_SNAPSHOT_PLUGIN_NAME=$(aws ssm get-parameters --names "/build/repository/snapshot/plugin/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - REPO_CENTRAL_PLUGIN_URL=$(aws ssm get-parameters --names "/build/repository/central/plugin/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - REPO_SNAPSHOT_PLUGIN_URL=$(aws ssm get-parameters --names "/build/repository/snapshot/plugin/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
 
       - echo '<?xml version="1.0" encoding="utf-8"?>' > /root/.m2/settings.xml
       - echo '<settings>' >> /root/.m2/settings.xml
+      - echo '  <profile>'
+      - echo '    <id>repository</id>'
+      - echo '    <repositories>'
+      - echo '      <repository>'
+      - echo '        <snapshots>'
+      - echo '          <enabled>false</enabled>'
+      - echo '        </snapshots>'
+      - echo '        <id>central</id>'
+      - echo '        <name>'$REPO_CENTRAL_NAME'</name>'
+      - echo '        <url>'$REPO_CENTRAL_URL'</url>'
+      - echo '      </repository>'
+      - echo '      <repository>'
+      - echo '        <snapshots />'
+      - echo '        <id>snapshots</id>'
+      - echo '        <name>$REPO_SNAPSHOT_NAME'</name>'
+      - echo '        <url>'$REPO_SNAPSHOT_URL'</url>'
+      - echo '      </repository>'
+      - echo '    </repositories>'
+      - echo '    <pluginRepositories>'
+      - echo '      <pluginRepository>'
+      - echo '        <snapshots>'
+      - echo '          <enabled>false</enabled>'
+      - echo '        </snapshots>'
+      - echo '        <id>central</id>'
+      - echo '        <name>'$REPO_CENTRAL_PLUGIN_NAME'</name>'
+      - echo '        <url>'$REPO_CENTRAL_PLUGIN_URL'</url>'
+      - echo '      </pluginRepository>'
+      - echo '      <pluginRepository>'
+      - echo '        <snapshots />'
+      - echo '        <id>snapshots</id>'
+      - echo '        <name>'$REPO_SNAPSHOT_PLUGIN_NAME'</name>'
+      - echo '        <url>'$REPO_SNAPSHOT_PLUGIN_URL'</url>'
+      - echo '      </pluginRepository>'
+      - echo '    </pluginRepositories>'
+      - echo '  </profile>'
+      - echo '  <activeProfiles>' >> /root/.m2/settings.xml
+      - echo '    <activeProfile>repository</activeProfile>' >> /root/.m2/settings.xml
+      - echo '  </activeProfiles>' >> /root/.m2/settings.xml
       - echo '  <servers>' >> /root/.m2/settings.xml
       - echo '    <server>' >> /root/.m2/settings.xml
       - echo '      <id>central</id>' >> /root/.m2/settings.xml
@@ -26,20 +72,12 @@ phases:
       - echo '</settings>' >> /root/.m2/settings.xml
 
       # Get the environment variables for use in the deployment templates
-      - export REPO_CENTRAL_NAME=$(aws ssm get-parameters --names "/build/repository/central/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
-      - export REPO_SNAPSHOT_NAME=$(aws ssm get-parameters --names "/build/repository/snapshot/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
-      - export REPO_CENTRAL_URL=$(aws ssm get-parameters --names "/build/repository/central/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
-      - export REPO_SNAPSHOT_URL=$(aws ssm get-parameters --names "/build/repository/snapshot/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
-      - export REPO_CENTRAL_PLUGIN_NAME=$(aws ssm get-parameters --names "/build/repository/central/plugin/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
-      - export REPO_SNAPSHOT_PLUGIN_NAME=$(aws ssm get-parameters --names "/build/repository/snapshot/plugin/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
-      - export REPO_CENTRAL_PLUGIN_URL=$(aws ssm get-parameters --names "/build/repository/central/plugin/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
-      - export REPO_SNAPSHOT_PLUGIN_URL=$(aws ssm get-parameters --names "/build/repository/snapshot/plugin/url" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
       - export CLOUDFORMATION_BUCKET=$(aws ssm get-parameters --names "/build/cloudformation/bucket/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
       - export POWERUSER_ROLE_ARN=$(aws ssm get-parameters --names "/build/poweruser/arn" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
   build:
     commands:
       # Deploy the stacks
-      - mvn cloudformation:deploy -P Master
+      - mvn cloudformation:deploy
 
       # Login to AWS Elastic Container Repository Service
       - $(aws ecr get-login --no-include-email --region us-east-1)

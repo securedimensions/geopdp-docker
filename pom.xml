@@ -29,14 +29,6 @@
         <!-- Template Properties -->
         <cloudformation_bucket>${env.CLOUDFORMATION_BUCKET}</cloudformation_bucket>
         <poweruser_role_arn>${env.POWERUSER_ROLE_ARN}</poweruser_role_arn>
-        <repo_central_name>${env.REPO_CENTRAL_NAME}</repo_central_name>
-        <repo_snapshot_name>${env.REPO_SNAPSHOT_NAME}</repo_snapshot_name>
-        <repo_central_url>${env.REPO_CENTRAL_URL}</repo_central_url>
-        <repo_snapshot_url>${env.REPO_SNAPSHOT_URL}</repo_snapshot_url>
-        <repo_central_plugin_name>${env.REPO_CENTRAL_PLUGIN_NAME}</repo_central_plugin_name>
-        <repo_snapshot_plugin_name>${env.REPO_SNAPSHOT_PLUGIN_NAME}</repo_snapshot_plugin_name>
-        <repo_central_plugin_url>${env.REPO_CENTRAL_PLUGIN_URL}</repo_central_plugin_url>
-        <repo_snapshot_plugin_url>${env.REPO_SNAPSHOT_PLUGIN_URL}</repo_snapshot_plugin_url>
     </properties>
 
     <dependencies>
@@ -99,42 +91,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <profiles>
-        <profile>
-            <id>Master</id>
-            <repositories>
-                <repository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <id>central</id>
-                    <name>${repo_central_name}</name>
-                    <url>${repo_central_url}</url>
-                </repository>
-                <repository>
-                    <snapshots />
-                    <id>snapshots</id>
-                    <name>${repo_snapshot_name}</name>
-                    <url>${repo_snapshot_urlt</url>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <id>central</id>
-                    <name>${repo_central_plugin_name}</name>
-                    <url>${repo_central_plugin_url}</url>
-                </pluginRepository>
-                <pluginRepository>
-                    <snapshots />
-                    <id>snapshots</id>
-                    <name>${repo_snapshot_plugin_name}</name>
-                    <url>${repo_snapshot_plugin_url}</url>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-    </profiles>
 </project>
