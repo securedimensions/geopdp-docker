@@ -76,6 +76,7 @@ phases:
       # Get the environment variables for use in the deployment templates
       - export CLOUDFORMATION_BUCKET=$(aws ssm get-parameters --names "/build/cloudformation/bucket/name" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
       - export POWERUSER_ROLE_ARN=$(aws ssm get-parameters --names "/build/poweruser/arn" | awk '/"Value"/ {print $2}' | sed -e 's/^"//' -e 's/",$//')
+      - export AWS_ACCOUNT_ID="$(echo $CODEBUILD_BUILD_ARN | egrep -o ':[0-9]+:' | egrep -o '[0-9]+')"
   build:
     commands:
       # Deploy the stacks
@@ -93,7 +94,6 @@ phases:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/geopdp_latest:v$GEOPDP_LATEST
 
       # Record new version
-      - export AWS_ACCOUNT_ID="$(echo $CODEBUILD_BUILD_ARN  | egrep -o ':[0-9]+:' | egrep -o '[0-9]+')"
       - echo $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/geopdp_latest:v$GEOPDP_LATEST > target/deployed.txt
   post_build:
     commands:
