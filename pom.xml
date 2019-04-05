@@ -20,12 +20,6 @@
     </scm>
 
     <properties>
-        <!-- Project Defaults -->
-        <dependency.locations.enabled>false</dependency.locations.enabled>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <!-- Template Properties -->
         <cloudformation_bucket>${env.CLOUDFORMATION_BUCKET}</cloudformation_bucket>
         <poweruser_role_arn>${env.POWERUSER_ROLE_ARN}</poweruser_role_arn>
