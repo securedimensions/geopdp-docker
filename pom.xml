@@ -38,8 +38,8 @@
             <plugins>
                 <plugin>
                     <groupId>com.digitalglobe.util</groupId>
-                    <artifactId>cloudformation</artifactId>
-                    <version>0.4.1-SNAPSHOT</version>
+                    <artifactId>cloudformation-maven-plugin</artifactId>
+                    <version>0.4.2</version>
                     <configuration>
                         <stackReadOnly>true</stackReadOnly>
                         <artifacts>false</artifacts>
