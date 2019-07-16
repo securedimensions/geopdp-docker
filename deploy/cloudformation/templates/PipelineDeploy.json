@@ -45,7 +45,7 @@
                 "Description": "Setup and Deploy the GeoPDP docker.",
                 "Environment": {
                     "ComputeType": "BUILD_GENERAL1_SMALL",
-                    "Image": "aws/codebuild/java:openjdk-11",
+                    "Image": "aws/codebuild/standard:2.0",
                     "PrivilegedMode": true,
                     "Type": "LINUX_CONTAINER"
                 },
@@ -159,7 +159,8 @@
             "Type": "String"
         },
         "OGCGitOAuthToken": {
-            "Type": "String"
+            "Type": "String",
+            "NoEcho": true
         }
     },
     "Outputs": {}
