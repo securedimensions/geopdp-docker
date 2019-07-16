@@ -3,6 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
+      runtime-versions:
+      Java: 11
   pre_build:
     commands:
       # Build the Settings.xml file
