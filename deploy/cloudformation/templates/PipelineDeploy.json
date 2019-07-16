@@ -54,9 +54,7 @@
                 "Source": {
                     "Location": "https://github.com/securedimensions/geopdp-docker.git",
                     "Type": "GITHUB",
-                    "BuildSpec": {
-                        "Fn::Sub": "deploy/buildspecs/buildspec-pipeline-deploy.json"
-                    }
+                    "BuildSpec": "deploy/buildspecs/buildspec-pipeline-deploy.yml"
                 },
                 "TimeoutInMinutes": 120
             },
