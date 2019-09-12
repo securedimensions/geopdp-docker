@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<pdp xmlns="http://authzforce.github.io/core/xmlns/pdp/6.0" version="6.0.0" enableXPath="true" strictAttributeIssuerMatch="false" maxVariableRefDepth="10" maxPolicyRefDepth="10">
+    <attributeDatatype>urn:ogc:def:dataType:geoxacml:1.0:geometry</attributeDatatype>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-intersects</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-one-and-only</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-disjoint</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-is-within-distance</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-is-simple</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-touches</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-contains</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-sym-difference</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-crosses</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-bag-intersection</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-bag-at-least-one-member-of</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-within</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-is-rectangle</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-is-empty</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-is-closed</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-union</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-bag-size</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-is-in</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-boundary</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-equals</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-intersection</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-set-equals</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-buffer</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-bag</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-length</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-area</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-centroid</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-is-valid</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-difference</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-bag-union</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-bag-subset</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-overlaps</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-distance</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:convert-to-metre</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:convert-to-square-metre</function>
+    <function>urn:ogc:def:function:geoxacml:1.0:geometry-convex-hull</function>
+    <refPolicyProvider xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="http://authzforce.github.io/pap-dao-flat-file/xmlns/pdp-ext/3.6" xsi:type="ns3:StaticFlatFileDAORefPolicyProvider" policyLocationPattern="${PARENT_DIR}/policies/*.xml" id="refPolicyProvider"/>
+    <rootPolicyProvider xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="StaticRefBasedRootPolicyProvider" id="rootPolicyProvider">
+        <policyRef>urn:secd:policyset:tb15</policyRef>
+    </rootPolicyProvider>
+</pdp>
