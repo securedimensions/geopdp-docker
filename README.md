@@ -1,3 +1,6 @@
+# Deprecation Note
+**This repository is no longer actively maintained as the Open Geospatial Consortium has released the GeoXACML 3.0 and the GeoXACML JSON Profile 1.0 standards. The GeoXACML 1.0 implementation repository [authzforce-geoxacml-basic](https://github.com/securedimensions/authzforce-geoxacml-basic) is no longer maintained and has become a public archive. Please use the corresponding implementation from Github repository [authzforce-ce-geoxacml3](https://github.com/securedimensions/authzforce-ce-geoxacml3).**
+
 # geopdp-docker
 Dockerized SEcure Dimensions geoPDP service processing GeoXACML authorization decision requests
 
